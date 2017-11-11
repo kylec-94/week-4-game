@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Malaa Collector</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
+	
+ 
+	
+
+</head>
+<body>
+
+<div class="container">
+
+	<div class="jumbotron">
+		<h1>Malaa Collector!</h1>
+  		<p>You will be given a random number at the start of the game.</p>
+
+  		<p>There are four Malaas below. By clicking on a Malaa you will add a specific amount of points to your total score.</p>
+
+  		<p>You win the game by matching your total score to a random nubmer, you lose the game if your total score goes above the random number.</p>
+
+  		<p>The value of each Malaa is hidden from you until you click on it.</p>
+
+  		<p>Each time when the game starts, the game will change the values of each Malaa.</p>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+
+		<!-- Section for game number -->
+
+		<div class="col-sm-2 panel panel-default panel-body" style="margin-right: 5%, height: 10%">
+			<div id="gameNumber"></div>
+			
+		</div>
+
+		<!-- Section for win/lose -->
+
+		<div class="col-sm-2 panel panel-default panel-body" id="winLoseCounter" style="text-align: center, height: 15%">
+			<div class="col-sm-1" id="status">
+        		<p> Wins: 
+          			<span id="winCounter"></span>
+        		</p>
+
+        		<p> Losses: 
+          			<span id="lossCounter"></span>
+        		</p>
+      		</div>
+		</div>
+
+
+	</div>
+
+	
+	<div class="row">
+
+	<div class="malaa-images">
+		
+		<div id="image-1" class="col-sm-2">
+			<button id="malaa-1">
+				<img src="https://d2tml28x3t0b85.cloudfront.net/tracks/artwork/9f339d40cbc311e694cf4d90ba29145c/a060ab90cbc311e6b360f9a2d9b7c498-Malaa-_Black-_-White_.png" height="100" width="100" />
+			</button>
+		</div>
+		
+		<div id="image-2" class="col-sm-2">
+			<button id="malaa-2">
+				<img src="https://bythewavs.com/wp-content/uploads/2016/03/Un3titled.jpg" height="100" width="100"/>
+			</button>
+		</div>
+		
+		<div id="image-3" class="col-sm-2">
+			<button id="malaa-3">
+				<img src="https://bythewavs.com/wp-content/uploads/2016/01/Malaa.jpg" height="100" width="100"/>
+			</button>
+		</div>
+		
+		<div id="image-4" class="col-sm-2">
+			<button id="malaa-4">
+				<img src="http://cdn.globaldanceelectronic.com/wp-content/uploads/2017/03/Screen-Shot-2017-03-08-at-12.54.40-AM.png" height="100" width="100" />
+			</button>
+		</div>
+	</div>
+
+	</div>
+	
+	<!-- Section for randomly generate -->
+	<div class="row" style="margin-top: 5%">
+		<div class="col-md-2 panel panel-default" id="scoreHeader">
+			<div class="panel-body">
+			<p>Your total score is:</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Section for the current score score -->
+	<div class="row">
+		<div class="col-md-2 panel panel-default">
+			<div class="panel-body" id="currentScore">
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- -->
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  	crossorigin="anonymous"></script>
+
+  	<script>
+
+$(document).ready(function(){
+
+	// variables for wins, losses, and playerScore
+
+  	var playerScore = 0;
+ 	var wins = 0;
+ 	var losses = 0;
+
+ 	var endNumber;
+ 	var malaaClicked = false;
+
+ 	// picks a random number between 1-15 for each crystal
+
+ 	var malaaValueOne = Math.floor((Math.random() * 15) +1);
+ 	console.log(malaaValueOne);
+ 	var malaaValueTwo  = Math.floor((Math.random() * 15) +1);
+ 	console.log(malaaValueTwo);
+ 	var malaaValueThree  = Math.floor((Math.random() * 15) +1);
+ 	console.log(malaaValueThree);
+ 	var malaaValueFour  = Math.floor((Math.random() * 15) +1);
+ 	console.log(malaaValueFour);
+
+
+ 	function newNumber(){
+	  var min = 19; 
+	  var max = 120; 
+
+	  endNumber = Math.floor(Math.random()*(max-min+1) +min);
+	  // return endNumber;
+	  console.log(endNumber);
+	}
+
+	newNumber();
+	$('#gameNumber').html("<div>" + endNumber + "</div>");
+	console.log(endNumber);
+	
+	
+
+	// function to reset the game after player has lost or won
+	function update(){
+ 		playerScore = 0;
+ 		$('#gameNumber').empty();
+ 		newNumber();
+ 		$('#gameNumber').html("<div>" + endNumber + "</div>");
+ 		malaaValueOne = Math.floor((Math.random() * 15) +1);
+		malaaValueTwo  = Math.floor((Math.random() * 15) +1);
+		malaaValueThree  = Math.floor((Math.random() * 15) +1);
+		malaaValueFour  = Math.floor((Math.random() * 15) +1);
+		
+	}
+
+
+	// when malaa-1 is clicked, the value will be added to player score // 
+	$('#malaa-1').on('click', function(){
+		console.log("malaaOne");
+		playerScore += malaaValueOne;
+		console.log(playerScore);
+		$('#currentScore').html("<div>" + playerScore + "</div>");
+
+		// if player wins, this message will show, wins will update, game will reset 
+		if (playerScore === endNumber){
+			alert("You win!");
+			wins++;
+			$('#winCounter').text(wins);
+			$('#currentScore').empty();
+			update();
+		} 
+
+		// if player loses, this message iwll show, losses will update, game will reset
+		else if (playerScore >= endNumber){
+			alert("You lose!");
+			losses++;
+			$('#lossCounter').text(losses);
+			$('#currentScore').empty();
+			update();
+			
+		}
+		
+		
+	});
+
+	$('#malaa-2').on('click', function(){
+		console.log("malaaOne");
+		playerScore += malaaValueTwo;
+		console.log(playerScore);
+		$('#currentScore').html("<div>" + playerScore + "</div>");
+
+		if (playerScore === endNumber){
+			alert("You win!");
+			wins++;
+			$('#winCounter').text(wins);
+			$('#currentScore').empty();
+			update();
+		} 
+
+		else if (playerScore >= endNumber){
+			alert("You lose!");
+			losses++;
+			$('#lossCounter').text(losses);
+			$('#currentScore').empty();
+			update();
+		}
+	});
+
+	$('#malaa-3').on('click', function(){
+		console.log("malaaOne");
+		playerScore += malaaValueThree;
+		console.log(playerScore);
+		$('#currentScore').html("<div>" + playerScore + "</div>");
+
+		if (playerScore === endNumber){
+			alert("You win!");
+			wins++;
+			$('#winCounter').text(wins);
+			$('#currentScore').empty();
+			update();
+		} 
+
+		else if (playerScore >= endNumber){
+			alert("You lose!");
+			losses++;
+			$('#lossCounter').text(losses);
+			$('#currentScore').empty();
+			update();
+		}
+		
+	});
+
+	$('#malaa-4').on('click', function(){
+		console.log("malaaOne");
+		playerScore += malaaValueFour;
+		console.log(playerScore);
+		$('#currentScore').html("<div>" + playerScore + "</div>");
+
+		if (playerScore === endNumber){
+			alert("You win!");
+			wins++;
+			$('#winCounter').text(wins);
+			$('#currentScore').empty();
+			update();
+		} 
+
+		else if (playerScore >= endNumber){
+			alert("You lose!");
+			losses++;
+			$('#lossCounter').text(losses);
+			$('#currentScore').empty();
+			update();
+		}
+		
+	});
+
+
+
+ 	
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+  	</script>
+
+</body>
+</html>
